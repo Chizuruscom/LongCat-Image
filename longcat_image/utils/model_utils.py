@@ -112,10 +112,6 @@ def encode_prompt(prompt: str, tokenizer: AutoTokenizer, text_tokenizer_max_leng
     input_ids = torch.cat( (prefix_tokens, text_tokens_and_mask.input_ids[0], suffix_tokens), dim=-1 )
     attention_mask = torch.cat( (prefix_tokens_mask, text_tokens_and_mask.attention_mask[0], suffix_tokens_mask), dim=-1 )
 
-
-    input_ids = text_tokens_and_mask['input_ids'].squeeze(0)
-    attention_mask = text_tokens_and_mask['attention_mask'].squeeze(0)
-
     return input_ids, attention_mask
 
 def encode_prompt_edit(prompt: str, img: Image.Image,tokenizer: AutoTokenizer, image_processor_vl: AutoProcessor, text_tokenizer_max_length: int, prompt_template_encode_prefix: str, prompt_template_encode_suffix: str):
@@ -158,10 +154,6 @@ def encode_prompt_edit(prompt: str, img: Image.Image,tokenizer: AutoTokenizer, i
     
     input_ids = torch.cat( (prefix_tokens, text_tokens_and_mask.input_ids[0], suffix_tokens), dim=-1 )
     attention_mask = torch.cat( (prefix_tokens_mask, text_tokens_and_mask.attention_mask[0], suffix_tokens_mask), dim=-1 )
-
-
-    # input_ids = text_tokens_and_mask['input_ids'].squeeze(0)
-    # attention_mask = text_tokens_and_mask['attention_mask'].squeeze(0)
 
     return input_ids, attention_mask, pixel_values, image_grid_thw
 
